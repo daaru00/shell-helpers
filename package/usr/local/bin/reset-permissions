@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+echo "usage: reset-permissions
+Reload current shell.
+"
+exit 0
+fi
+
+PATH_TO_RESET=${1:-"./"}
+
+sudo chown -R $USER:$(id -gn $USER) $PATH_TO_RESET

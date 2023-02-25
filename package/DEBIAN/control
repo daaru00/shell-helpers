@@ -1,0 +1,8 @@
+Package: shell-helpers
+Version: 1.0
+Architecture: all
+Maintainer: Fabio Gollinucci <fbgolly@gmail.com>
+Description: Collection of shell helpers
+Depends: bash
+Recommends: gettext, zip, flock, jq, curl, wget
+Suggests: awscli, code

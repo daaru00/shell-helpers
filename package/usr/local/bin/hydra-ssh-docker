@@ -1,0 +1,26 @@
+#/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
+echo "usage: brute-force-ssh <host> <username list file> <passwords list file>
+Bruteforce SSH login using dictionary file.
+"
+exit 0
+fi
+
+HOST=$1
+USERNAME_LIST=$2
+PASSWORD_LIST=$3
+
+if [[ -z "$USERNAME_LIST" ]]; then
+  brute-force-passwords /tmp/usernames.txt
+  USERNAME_LIST=/tmp/usernames.txt
+fi
+
+if [[ -z "$PASSWORD_LIST" ]]; then
+  brute-force-passwords /tmp/passwords.txt
+  PASSWORD_LIST=/tmp/passwords.txt
+fi
+
+docker run -v "$USERNAME_LIST:$USERNAME_LIST" -v "$PASSWORD_LIST:$PASSWORD_LIST" --rm tarampampam/hydra:9.3.0-ext -L $USERNAME_LIST -P $PASSWORD_LIST $HOST ssh

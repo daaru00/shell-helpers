@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
+echo "usage: git-push-to-origin <remote> <branch>
+Set an origin and push.
+"
+exit 0
+fi
+
+REMOTE=$1
+BRANCH=${2:-"master"}
+
+git remote add origin $REMOTE
+git push -u origin --force $BRANCH
+

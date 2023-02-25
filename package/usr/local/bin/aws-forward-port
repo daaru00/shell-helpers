@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" || -z "$2" || -z "$3" ]]; then
+echo "usage: aws-forward-port <instance id> <remote port> <local port> <profile>
+Open a remote tunnel using an EC2 instance as jump host.
+"
+exit 0
+fi
+
+INSTANCE_ID=${1}
+REMOTE_PORT=${2}
+LOCAL_PORT=${3}
+PROFILE=${4:-$AWS_DEFAULT_PROFILE}
+
+aws --profile ${PROFILE} ssm start-session --document-name AWS-StartPortForwardingSession --target ${INSTANCE_ID} --parameters "{\"portNumber\":[\"${REMOTE_PORT}\"],\"localPortNumber\":[\"${LOCAL_PORT}\"]}"

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
+echo "usage: ssh-send-key <user>@<host> <key>
+Send public ky to remote host.
+"
+exit 0
+fi
+
+HOST=$1
+KEY=${2:-~/.ssh/id_rsa.pub}
+
+cat $KEY | ssh $HOST "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+echo "usage: code-open-and-exit
+Open VS Code in the current directory and exit.
+"
+exit 0
+fi
+
+code . && exit

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
+echo "usage: aws-connect-to-instance <instance id> <profile>
+Connect to EC2 instance using SSM.
+"
+exit 0
+fi
+
+INSTANCE_ID=${1}
+PROFILE=${2:-$AWS_DEFAULT_PROFILE}
+
+aws --region eu-west-1 --profile ${PROFILE} ssm start-session --document-name AWS-StartInteractiveCommand --parameters command="cd /; sudo bash -l" --target ${INSTANCE_ID}

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+echo "usage: aws-update
+Update AWS CLI to the latest version.
+"
+exit 0
+fi
+
+cd /tmp
+curl -s "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscli.zip"
+unzip -q -o awscli.zip
+sudo bash ./aws/install --update
+aws --version

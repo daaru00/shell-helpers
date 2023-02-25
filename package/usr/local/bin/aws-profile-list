@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+echo "usage: aws-profile-list
+List configured profiles.
+"
+exit 0
+fi
+
+AWS_CONFIG_FILE=${1:-~/.aws/credentials}
+
+grep -e "^\\[.*\\]$" ${AWS_CONFIG_FILE} | sed 's/\[//' | sed 's/\]//'

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+echo "usage: docker-clean-images
+Remove unused Docker images.
+"
+exit 0
+fi
+
+docker image prune -a

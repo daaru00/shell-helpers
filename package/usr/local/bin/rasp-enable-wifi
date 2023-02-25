@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" || -z "$2" ]]; then
+echo "usage: rasp-enable-wifi <ssid> <password>
+Enable WiFi connection on Raspberry OS.
+"
+exit 0
+fi
+
+SSID=$1
+PASS=$2
+
+CONF=$(cat <<EOF
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=it
+
+network={
+    ssid="${SSID}"
+    psk="${PASS}"
+}
+EOF
+)
+echo "$CONF" > wpa_supplicant.conf

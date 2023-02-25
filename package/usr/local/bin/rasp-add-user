@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" || -z "$2" ]]; then
+echo "usage: rasp-add-user <username> <password>
+Add new user to Raspberry OS.
+"
+exit 0
+fi
+
+USERNAME=$1
+PASSWORD=$(echo $2 | openssl passwd -6 -stdin)
+
+touch userconf
+sed -i "/${USERNAME}\:/d" userconf
+echo "${USERNAME}:${PASSWORD}" >> userconf

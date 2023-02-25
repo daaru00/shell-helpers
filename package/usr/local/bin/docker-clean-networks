@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+echo "usage: docker-clean-networks
+Remove unused Docker networks.
+"
+exit 0
+fi
+
+docker network prune

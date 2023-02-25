@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
+echo "usage: sam-validate <template>
+Validate SAM/CloudFormation template.
+"
+exit 0
+fi
+
+TEMPLATE_FILE=$1
+
+sam validate --lint --template-file $TEMPLATE_FILE

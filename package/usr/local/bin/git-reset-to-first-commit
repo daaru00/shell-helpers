@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
+echo "usage: git-reset-to-first-commit <remote> <branch> <message>
+Reset remote repository to first commit.
+"
+exit 0
+fi
+
+REMOTE=$1
+BRANCH=${2:-"master"}
+MESSAGE=${3:-"Initial commit"}
+
+rm -rf .git
+
+git-first-commit
+git-push-to-origin $REMOTE $BRANCH
+

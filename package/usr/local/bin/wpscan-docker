@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
+echo "usage: wpscan <host>
+Execute WP scan on host using a Docker container.
+"
+exit 0
+fi
+
+HOST=$1
+
+docker run -it --rm wpscanteam/wpscan:3.8.18 --verbose --url $HOST --random-user-agent

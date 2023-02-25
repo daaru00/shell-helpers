@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
+echo "usage: nmap-scan-port <cidr> <port>
+Perform a NMAP scan on network searching for SSH.
+"
+exit 0
+fi
+
+CIDR=$1
+PORT=${2:-"22"}
+
+nmap $CIDR -p $PORT --open

@@ -1,0 +1,16 @@
+#/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
+echo "usage: brute-force-names <output file> <type>
+Downlod usernames dictionary file. 
+Type parameter is the name of file in https://github.com/danielmiessler/SecLists/tree/master/Usernames, for example 'top-usernames-shortlist'.
+"
+exit 0
+fi
+
+OUTPUT_FILE=$1
+TYPE=${2:-"top-usernames-shortlist"}
+
+curl -s -o $OUTPUT_FILE https://raw.githubusercontent.com/danielmiessler/SecLists/master/Usernames/$TYPE.txt

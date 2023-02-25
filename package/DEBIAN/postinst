@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo "Package shell-helpers installed successfully!"
+
+exit 0

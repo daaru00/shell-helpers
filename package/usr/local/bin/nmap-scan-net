@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
+echo "usage: nmap-scan-net <cidr>
+Perform a NMAP fast scan on network.
+"
+exit 0
+fi
+
+CIDR=$1
+
+nmap -sn $CIDR

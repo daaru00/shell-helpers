@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
+echo "usage: git-tag-delete <tag>
+Delete tag both from local and remote
+"
+exit 0
+fi
+
+TAG=$1
+
+git tag -d $TAG
+git push --delete origin $TAG

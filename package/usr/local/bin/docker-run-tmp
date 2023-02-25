@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+echo "usage: docker-run-tmp <docker run args...>
+Run a temporary container.
+"
+exit 0
+fi
+
+docker run -it --rm $@

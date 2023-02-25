@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+echo "usage: git-tag-list
+List remote repository tags.
+"
+exit 0
+fi
+
+git ls-remote --tags origin

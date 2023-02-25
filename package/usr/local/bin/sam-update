@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+echo "usage: sam-update
+Update SAM CLI to the latest version.
+"
+exit 0
+fi
+
+cd /tmp
+curl -s -L "https://github.com/aws/aws-sam-cli/releases/latest/download/aws-sam-cli-linux-x86_64.zip" -o "awssam.zip"
+unzip -q -o awssam.zip -d sam
+sudo bash ./sam/install --update
+sam --version

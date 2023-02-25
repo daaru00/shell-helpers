@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+echo "usage: aws-profile-clear <shell config>
+Clear default profile.
+"
+exit 0
+fi
+
+SHELL_CONFIG_FILE=${1:-~/.bashrc}
+
+if [[ ! "$(grep 'AWS_DEFAULT_PROFILE' ${SHELL_CONFIG_FILE})" == "" ]]
+then
+  sed -i '/AWS_DEFAULT_PROFILE/d' ${SHELL_CONFIG_FILE}
+fi

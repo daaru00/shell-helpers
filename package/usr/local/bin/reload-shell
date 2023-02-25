@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+echo "usage: reload-shell <shell config>
+Reload current shell.
+"
+exit 0
+fi
+
+SHELL_CONFIG_FILE=${1:-~/.bashrc}
+
+source $SHELL_CONFIG_FILE

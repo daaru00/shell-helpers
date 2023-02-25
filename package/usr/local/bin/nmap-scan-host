@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
+echo "usage: nmap-scan-host <host>
+Perform a NMAP scan on specific host.
+"
+exit 0
+fi
+
+HOST=$1
+
+sudo nmap -O --osscan-guess $HOST

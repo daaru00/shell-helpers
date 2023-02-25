@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
+echo "usage: aws-profile-set <profile> <shell config>
+Set default profile.
+"
+exit 0
+fi
+
+DEFAULT_PROFILE=${1}
+SHELL_CONFIG_FILE=${2:-~/.bashrc}
+
+aws-profile-clear $SHELL_CONFIG_FILE
+echo "export AWS_DEFAULT_PROFILE=${DEFAULT_PROFILE}" >> ${SHELL_CONFIG_FILE}
+
+reload-shell $SHELL_CONFIG_FILE
