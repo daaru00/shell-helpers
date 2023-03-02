@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+echo "usage: aws-docker <command>
+Run AWS CLI in Docker container.
+"
+exit 0
+fi
+
+COMMAND=${@:-"help"}
+
+docker run -it --rm -v "$(pwd):/app" -w "/app" -v ~/.aws/credentials:/root/.aws/credentials:ro amazon/aws-cli $COMMAND

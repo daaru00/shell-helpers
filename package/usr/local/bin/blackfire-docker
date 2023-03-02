@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+echo "usage: blackfire-docker <command>
+Run Blackfire CLI in Docker container.
+"
+exit 0
+fi
+
+BLACKFIRE_CLIENT_ID=${BLACKFIRE_CLIENT_ID:-"xxxxxxxxxx"}
+BLACKFIRE_CLIENT_TOKEN=${BLACKFIRE_CLIENT_TOKEN:-"xxxxxxxxxx"}
+
+ENTRYPOINT="/bin/sh"
+COMMAND=""
+if [[ -n "$@" ]]; then
+  ENTRYPOINT="/usr/local/bin/blackfire"
+  COMMAND="$@"
+fi
+
+docker run -it --entrypoint $ENTRYPOINT --rm --env "BLACKFIRE_CLIENT_ID=${BLACKFIRE_CLIENT_ID}" --env "BLACKFIRE_CLIENT_TOKEN=${BLACKFIRE_CLIENT_TOKEN}" --env "BLACKFIRE_DISABLE_LEGACY_PORT=1" -v "$(pwd):/app" -w "/app" blackfire/blackfire:2 $ARGUMENTS

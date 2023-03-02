@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+echo "usage: docker-clean-all
+Execute a Docker system prune.
+"
+exit 0
+fi
+
+docker system prune --all --volumes

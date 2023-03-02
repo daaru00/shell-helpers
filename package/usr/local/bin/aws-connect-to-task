@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" || -z "$2" ]]; then
+echo "usage: aws-list-tasks <cluster> <task id> <profile>
+Connect to ECS tasks.
+"
+exit 0
+fi
+
+CLUSTER=$1
+TASK=$2
+PROFILE=${3:-$AWS_DEFAULT_PROFILE}
+
+aws --profile ${PROFILE} ecs execute-command --cluster $CLUSTER --task $TASK --interactive --command "/bin/bash"

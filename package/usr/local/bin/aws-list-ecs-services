@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
+echo "usage: aws-list-services <cluster> <profile>
+List ECS services.
+"
+exit 0
+fi
+
+CLUSTER=$1
+PROFILE=${2:-$AWS_DEFAULT_PROFILE}
+
+aws --profile ${PROFILE} ecs list-services --cluster ${CLUSTER} --output text | cut -d '/' -f3 | sort

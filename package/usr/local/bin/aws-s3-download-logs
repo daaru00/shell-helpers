@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
+echo "usage: aws-s3-download-logs <s3 uri> <output path>
+Download logs form S3 bucket.
+"
+exit 0
+fi
+
+S3_URI=$1
+OUTPUT_PATH=${2:-/tmp/logs}
+
+mkdir -p $OUTPUT_PATH
+aws s3 sync $S3_URI $OUTPUT_PATH
+gunzip -f -r $OUTPUT_PATH

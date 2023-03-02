@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+echo "usage: sam-docker <command>
+Run SAM CLI in Docker container.
+"
+exit 0
+fi
+
+COMMAND=${@:-"--help"}
+
+docker run -it --entrypoint /usr/local/bin/sam --rm -v "$(pwd):/app" -w "/app" -v ~/.aws/credentials:/root/.aws/credentials:ro amazon/aws-sam-cli-build-image-provided $COMMAND
