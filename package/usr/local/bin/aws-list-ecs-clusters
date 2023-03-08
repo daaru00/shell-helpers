@@ -9,7 +9,6 @@ List ECS clusters.
 exit 0
 fi
 
-CLUSTER=$1
-PROFILE=${2:-$AWS_DEFAULT_PROFILE}
+PROFILE=${1:-$AWS_DEFAULT_PROFILE}
 
 aws --profile ${PROFILE} ecs list-clusters --output text | cut -d '/' -f2 | sort

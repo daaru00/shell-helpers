@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
+echo "usage: aws-list-amis <query> <profile>
+List AMIs by query, sorted by CreationDate.
+"
+exit 0
+fi
+
+QUERY=$1
+PROFILE=${2:-$AWS_DEFAULT_PROFILE}
+
+aws --profile ${PROFILE} ec2 describe-images --owners self --filters "Name=name,Values=*${QUERY}*" --query 'reverse(sort_by(Images, &CreationDate))[].[ImageId, Name]' --output text

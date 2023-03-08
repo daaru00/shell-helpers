@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
+echo "usage: aws-s3-share <s3 uri> <expire seconds> <profile>
+Share an S3 object with a pre-signed url.
+"
+exit 0
+fi
+
+S3_URI=$1
+EXPIRE=${2:-43200}
+PROFILE=${3:-$AWS_DEFAULT_PROFILE}
+
+aws --profile $PROFILE s3 presign --expires-in $EXPIRE $S3_URI

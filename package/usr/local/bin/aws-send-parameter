@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" || -z "$2" || -z "$3" ]]; then
+echo "usage: aws-send-parameter <source profile> <target profile> <parameter>
+Copy SSM parameter value from one profile to an other.
+"
+exit 0
+fi
+
+SOURCE_PROFILE=$=${1:-$AWS_DEFAULT_PROFILE}
+TARGET_PROFILE=${2:-$AWS_DEFAULT_PROFILE}
+PARAMETER=${3:-$AWS_DEFAULT_PROFILE}
+
+aws ssm put-parameter --profile $TARGET_PROFILE --type "String" --name $PARAMETER --value "$(aws --profile $SOURCE_PROFILE ssm get-parameter --name $PARAMETER --query 'Parameter.Value' --output text)" --overwrite --query 'Version' --output text
