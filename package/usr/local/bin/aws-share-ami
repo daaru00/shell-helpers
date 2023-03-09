@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" || -z "$2" || -z "$3" ]]; then
+echo "usage: aws-share-ami <source profile> <target profile> <AMI id>
+Share AMI with an other AWS account.
+"
+exit 0
+fi
+
+SOURCE_PROFILE=$1
+TARGET_PROFILE=$2
+IMAGE_ID=$3
+
+AWS_ACCOUNT=$(aws --profile ${TARGET_PROFILE} sts get-caller-identity --query "Account" --output text)
+aws ec2 modify-image-attribute --profile $SOURCE_PROFILE --image-id $IMAGE_ID --launch-permission "Add=[{UserId=${AWS_ACCOUNT}}]"

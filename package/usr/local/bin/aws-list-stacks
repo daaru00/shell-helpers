@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+echo "usage: aws-list-stacks <profile>
+List CloudFormation stacks.
+"
+exit 0
+fi
+
+PROFILE=${1:-$AWS_DEFAULT_PROFILE}
+
+aws --profile ${PROFILE} cloudformation list-stacks --query 'StackSummaries[?StackStatus!=`DELETE_COMPLETE`].[{name:StackName,status:StackStatus}]' --output text

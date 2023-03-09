@@ -12,4 +12,4 @@ fi
 QUERY=$1
 PROFILE=${2:-$AWS_DEFAULT_PROFILE}
 
-aws --profile ${PROFILE} ec2 describe-images --owners self --filters "Name=name,Values=*${QUERY}*" --query 'reverse(sort_by(Images, &CreationDate))[].[ImageId, Name]' --output text
+aws --profile ${PROFILE} ec2 describe-images --owners self --filters "Name=name,Values=*${QUERY}*" --query 'reverse(sort_by(Images, &CreationDate))[].[{name:Name,id:ImageId}]' --output table

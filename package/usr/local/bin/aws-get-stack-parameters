@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+echo "usage: aws-get-stack-parameters <stack> <profile>
+Get CloudFormation stack parameters.
+"
+exit 0
+fi
+
+STACK=$1
+PROFILE=${2:-$AWS_DEFAULT_PROFILE}
+
+aws --profile ${PROFILE} cloudformation describe-stacks --stack-name $STACK --query "Stacks[0].Parameters[*][{key: ParameterKey,value:ParameterValue}]" --output text
