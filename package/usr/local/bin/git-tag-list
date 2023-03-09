@@ -9,4 +9,4 @@ List remote repository tags.
 exit 0
 fi
 
-git ls-remote --tags origin
+git ls-remote --tags origin | cut -f2 | cut -d '/' -f3
