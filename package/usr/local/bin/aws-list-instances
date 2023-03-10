@@ -11,4 +11,4 @@ fi
 
 PROFILE=${1:-$AWS_DEFAULT_PROFILE}
 
-aws --profile $PROFILE ec2 describe-instances --query "Reservations[*].Instances[*].{name: Tags[?Key=='Name'] | [0].Value, instance_id: InstanceId, ip_address: PrivateIpAddress}" --filters Name=instance-state-name,Values=running --output table
+aws --profile $PROFILE ec2 describe-instances --filters Name=instance-state-name,Values=running --query "Reservations[*].Instances[*].{name: Tags[?Key=='Name'] | [0].Value, id: InstanceId, ip: PrivateIpAddress}" --output text
