@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
+echo "usage: git-generate-changelog <version>
+Generate changelog using conventional commit message.
+"
+exit 0
+fi
+
+VERSION=${1}
+
+npx standard-version --tag-prefix "" --skip.tag --release-as $VERSION

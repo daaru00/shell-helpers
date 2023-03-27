@@ -4,7 +4,7 @@ set -e
 
 if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" || -z "$2" ]]; then
 echo "usage: aws-set-parameter <parameter> <value> <profile>
-Set SSM parmeter value.
+Set SSM parameter value.
 "
 exit 0
 fi
@@ -13,4 +13,4 @@ PARAMETER=$1
 VALUE=$2
 PROFILE=${3:-$AWS_DEFAULT_PROFILE}
 
-aws ssm put-parameter --profile $PROFILE --type "String" --name $PARAMETER --value $VALUE --overwrite --query 'Version' --output text
+aws ssm put-parameter --profile $PROFILE --type "String" --name "${PARAMETER}" --value "${VALUE}" --overwrite --query 'Version' --output text

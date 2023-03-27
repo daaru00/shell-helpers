@@ -9,6 +9,6 @@ Set default profile.
 exit 0
 fi
 
-SHELL_CONFIG_FILE=${1:-~/.bashrc}
+SHELL_CONFIG_FILE=${1:-$(current-shell-config)}
 
 grep 'AWS_DEFAULT_PROFILE' ${SHELL_CONFIG_FILE} | sed 's/AWS_DEFAULT_PROFILE=//' | sed 's/export\ //'

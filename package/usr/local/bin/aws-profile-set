@@ -10,7 +10,7 @@ exit 0
 fi
 
 DEFAULT_PROFILE=${1}
-SHELL_CONFIG_FILE=${2:-~/.bashrc}
+SHELL_CONFIG_FILE=${2:-$(current-shell-config)}
 
 aws-profile-clear $SHELL_CONFIG_FILE
 echo "export AWS_DEFAULT_PROFILE=${DEFAULT_PROFILE}" >> ${SHELL_CONFIG_FILE}

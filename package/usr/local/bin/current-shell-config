@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+echo "usage: current-shell-config
+Print the current shell config file.
+"
+exit 0
+fi
+
+case $SHELL in
+
+  /bin/sh)
+    realpath ~/.shrc
+    ;;
+
+  /bin/bash)
+    realpath ~/.bashrc 
+    ;;
+
+  /bin/zsh)
+    realpath ~/.zshrc
+    ;;
+
+  *)
+    exit 1
+esac

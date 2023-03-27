@@ -9,6 +9,6 @@ Reload current shell.
 exit 0
 fi
 
-SHELL_CONFIG_FILE=${1:-~/.bashrc}
+SHELL_CONFIG_FILE=${1:-$(current-shell-config)}
 
 source $SHELL_CONFIG_FILE
