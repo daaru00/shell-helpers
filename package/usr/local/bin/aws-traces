@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+echo "usage: aws-traces <profile>
+Show X-Ray traces.
+"
+exit 0
+fi
+
+PROFILE=${1:-$AWS_DEFAULT_PROFILE}
+
+sam traces --profile $PROFILE --tail

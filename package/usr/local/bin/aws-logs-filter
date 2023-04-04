@@ -1,0 +1,32 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" || -z "$2" ]]; then
+echo "usage: aws-logs <log group> <filter> <profile>
+Show CloudWatch LogGroup's logs with filter.
+"
+exit 0
+fi
+
+LOG_GROUP=$1
+FILTER=$2
+PROFILE=${3:-$AWS_DEFAULT_PROFILE}
+
+LOG_GROUPS=$(aws --profile "${PROFILE}" logs describe-log-groups --log-group-name-pattern "${LOG_GROUP}" --query "logGroups[*].logGroupName")
+
+if [[ "${LOG_GROUPS}" == "[]" ]]; then
+  echo "No log group found with name '${LOG_GROUP}'"
+  exit 1
+fi
+
+LIST=""
+PARAMS=""
+for row in $(echo "${LOG_GROUPS}" | jq -r '.[]'); do
+  LIST="${LIST} ${row}" 
+  PARAMS="${PARAMS} --cw-log-group ${row}" 
+done
+
+echo -e "Showing log groups${LIST} with filter \"$FILTER\"..\n"
+
+eval "sam logs --profile $PROFILE $PARAMS --filter \"$FILTER\" -t"

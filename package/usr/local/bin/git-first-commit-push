@@ -3,15 +3,15 @@
 set -e
 
 if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
-echo "usage: git-first-commit-push <remote> <branch> <message>
+echo "usage: git-first-commit-push <remote> <message> <branch>
 Initiaze remote git repository with first commit.
 "
 exit 0
 fi
 
 REMOTE=$1
-BRANCH=${2:-"master"}
 MESSAGE=${2:-"Initial commit"}
+BRANCH=${3:-"master"}
 
-git-first-commit $MESSAGE
+git-first-commit "${MESSAGE}"
 git-push-to-origin $REMOTE $BRANCH
