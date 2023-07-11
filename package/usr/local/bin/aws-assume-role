@@ -2,18 +2,17 @@
 
 set -e
 
-if [[ "$1" == "--help" || "$1" == "-h" ]]; then
-echo "usage: aws-assume-role <role> <profile>
+if [[ "$1" == "--help" || "$1" == "-h" || -z $1 ]]; then
+echo "usage: aws-assume-role <role arn> <profile>
 Assume a profile's role and print temporary credentials.
 "
 exit 0
 fi
 
-ROLE_NAME=${1:-"OrganizationAccountAccessRole"}
+ROLE_ARN=$1
 PROFILE=${2:-$AWS_DEFAULT_PROFILE}
 
-AWS_ACCOUNT=$(aws --profile ${PROFILE} sts get-caller-identity --query "Account" --output text)
-assume_role_response=$(aws --profile ${PROFILE} sts assume-role --role-arn "arn:aws:iam::${AWS_ACCOUNT}:role/${ROLE_NAME}" --role-session-name "tmp-session")
+assume_role_response=$(aws --profile ${PROFILE} sts assume-role --role-arn "${ROLE_ARN}" --role-session-name "tmp-session")
 
 export AWS_ACCESS_KEY_ID=$(echo $assume_role_response | jq -r .Credentials.AccessKeyId)
 echo "export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID"

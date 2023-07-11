@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+echo "usage: ssh-generate-key <key name>
+Generate SSH keys.
+"
+exit 0
+fi
+
+KEY_NAME=${1:-'key'}
+
+ssh-keygen -t rsa -f $KEY_NAME -q -P ""
