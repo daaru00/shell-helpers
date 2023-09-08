@@ -4,7 +4,7 @@ set -e
 
 if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
 echo "usage: git-commit-push <message>
-Stach all changes, create a commit and push.
+Stage all changes, create a commit and push.
 "
 exit 0
 fi

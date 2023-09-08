@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
+echo "usage: git-stash-staged <message>
+Stash only staged files.
+"
+exit 0
+fi
+
+MESSAGE=$1
+
+git stash --keep-index
+git stash push -m "$MESSAGE"
