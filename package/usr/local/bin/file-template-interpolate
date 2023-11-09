@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
+echo "usage: file-template-interpolate <template> <output>,file-template-interpolate <template>
+Generate file from template interpolating environment variable.
+If output file was not provided the input template file will be overwritten.
+"
+exit 0
+fi
+
+# Interpolate file content
+
+TEMPLATE_FILE=${1}
+OUTPUT_FILE=${2:-$TEMPLATE_FILE}
+
+OUTPUT=$(cat $TEMPLATE_FILE | envsubst)
+
+# Write output
+
+echo "$OUTPUT" > $OUTPUT_FILE

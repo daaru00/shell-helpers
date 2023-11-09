@@ -2,7 +2,7 @@
 
 set -e
 
-if [[ "$1" == "--help" || "$1" == "-h" || -z $1 ]]; then
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
 echo "usage: aws-assume-role <role arn> <profile>
 Assume a profile's role and print temporary credentials.
 "
