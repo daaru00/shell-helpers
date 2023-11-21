@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+echo "usage: git-get-last-commit
+Get last commit.
+"
+exit 0
+fi
+
+git show
+
