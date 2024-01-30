@@ -12,4 +12,4 @@ fi
 PARAMETER=$1
 PROFILE=${2:-$AWS_DEFAULT_PROFILE}
 
-aws ssm get-parameter --profile $PROFILE --name "${PARAMETER}" --query 'Parameter.Value' --output text
+aws ssm get-parameter --profile $PROFILE --name "${PARAMETER}" --no-with-decryption --query 'Parameter.Value' --output text

@@ -3,7 +3,7 @@
 set -e
 
 if [[ "$1" == "--help" || "$1" == "-h" ]]; then
-echo "usage: git-get-origin <name>
+echo "usage: git-origin-get <name>
 Get origin URL.
 "
 exit 0

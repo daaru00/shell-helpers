@@ -3,7 +3,7 @@
 set -e
 
 if [[ "$1" == "--help" || "$1" == "-h" ]]; then
-echo "usage: git-get-last-commit
+echo "usage: git-last-commit-get
 Get last commit.
 "
 exit 0
