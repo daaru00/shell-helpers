@@ -2,15 +2,18 @@
 
 set -e
 
-if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" || -z "$2" ]]; then
-echo "usage: aws-list-tasks <cluster> <service> <profile>
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
+echo "usage: aws-list-tasks <cluster> <profile>
 List ECS tasks.
 "
 exit 0
 fi
 
 CLUSTER=$1
-SERVICE=$2
-PROFILE=${3:-$AWS_DEFAULT_PROFILE}
+PROFILE=${2:-$AWS_DEFAULT_PROFILE}
 
-aws --profile ${PROFILE} ecs list-tasks --cluster ${CLUSTER} --service-name ${SERVICE} --output text | cut -d '/' -f3
+IDS=$(aws --profile ${PROFILE} ecs list-tasks --cluster ${CLUSTER} --output text | cut -d '/' -f3)
+for ID in $IDS; do
+  aws --profile ${PROFILE} ecs describe-tasks --cluster ${CLUSTER} --tasks ${ID} --query "tasks[0].{group: group, arn: taskArn, containers: containers[*].name}" --output text | sed -E "s/arn:.*\//ID\ /gm" | sed -E "s/service:/SERVICE\ /gm"
+  echo ""
+done
