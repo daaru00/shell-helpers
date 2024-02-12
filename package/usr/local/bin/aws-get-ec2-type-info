@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
+echo "usage: aws-get-ec2-type-info <type> <profile>
+Get EC2 type information.
+"
+exit 0
+fi
+
+INSTANCE_TYPE=$1
+PROFILE=${2:-$AWS_DEFAULT_PROFILE}
+
+aws --profile $PROFILE ec2 describe-instance-types --instance-types "${INSTANCE_TYPE}" --query "InstanceTypes[0]" --output table
