@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+echo "usage: go-docker <version>
+Run GO in Docker container.
+"
+exit 0
+fi
+
+VERSION=${1:-"latest"}
+
+docker run -it --rm -v "$(pwd):/app" -w "/app" --entrypoint "/bin/bash" "go:$VERSION"
