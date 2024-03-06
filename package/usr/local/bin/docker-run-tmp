@@ -2,8 +2,8 @@
 
 set -e
 
-if [[ "$1" == "--help" || "$1" == "-h" ]]; then
-echo "usage: docker-run-tmp <docker run args...>
+if [[ "$1" == "--help" || "$1" == "-h" || -z "$1" ]]; then
+echo "usage: docker-run-tmp <docker run args...> <image>
 Run a temporary container.
 "
 exit 0
