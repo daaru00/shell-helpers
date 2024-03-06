@@ -23,6 +23,8 @@ jobs:
 
       - name: "Build packages"
         run: |
+          apt install -y alien
+          
           make build
           make pack
 

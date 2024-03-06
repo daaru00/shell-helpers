@@ -7,6 +7,7 @@ This repository contains several bash scripts and release procedure to distribut
 Script files are located in the folder `./package/usr/local/bin`.
 Debian package file descriptor is located in `./package/DEBIAN/control`.
 Debian package and tar archive creation are describe in `Makefile`.
+RPM package is converted from the debian one using [alien](https://wiki.debian.org/Alien).
 
 ## Install
 
@@ -19,13 +20,22 @@ sudo dpkg -i /tmp/shell-helpers.deb
 rm /tmp/shell-helpers.deb
 ```
 
+### CentOS
+
+Download the RPM package "shell-helpers.rpm" from latest release and install it:
+```bash
+curl -s -o /tmp/shell-helpers.rpm https://github.com/daaru00/shell-helpers/releases/download/latest/shell-helpers.rpm
+sudo rpm -i /tmp/shell-helpers.rpm
+rm /tmp/shell-helpers.rpm
+```
+
 ### Unix-like OS
 
-Download the TAR archive from 
+Download the TGZ archive "shell-helpers.tgz" from latest release and extract scripts: 
 ```bash
-curl -s -o /tmp/shell-helpers.tar https://github.com/daaru00/shell-helpers/releases/download/latest/shell-helpers.tar
-sudo tar -xf ./dist/shell-helpers.tar -C /usr/local/bin
-rm /tmp/shell-helpers.tar
+curl -s -o /tmp/shell-helpers.tgz https://github.com/daaru00/shell-helpers/releases/download/latest/shell-helpers.tgz
+sudo tar -xvzf ./dist/shell-helpers.tar -C /usr/local/bin
+rm /tmp/shell-helpers.tgz
 ```
 
 ## Usage
@@ -38,19 +48,7 @@ make build
 ```
 Produce file `./dist/shell-helpers.deb`.
 
-Build a TAR archive:
-```bash
-make pack
-```
-Produce file `./dist/shell-helpers.tar`.
-
 ### Install
-
-Unpack TAR archive into `/usr/local/bin`:
-```bash
-make unpack
-```
-This operation is irreversible, file cannot be automatically deleted later
 
 Install built debian package:
 ```bash
