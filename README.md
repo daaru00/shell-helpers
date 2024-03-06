@@ -63,6 +63,15 @@ Remove installed debian package:
 make remove
 ```
 
+## Commands Documentation
+
+Execute the make command "doc":
+```bash
+make doc
+```
+Will execute all commands inside `./package/usr/local/bin` with the argument '-h'. 
+The command's help output will be elaborated end saved into [COMMANDS.md](./COMMANDS.md).
+
 ## New Releases
 
 Create a new local tag:
@@ -73,6 +82,11 @@ git tag 1.2.3
 Push the newly created tag to the remote:
 ```bash
 git push --tags
+```
+
+Or... with a single shell helper command:
+```bash
+git-tag-push 1.2.3
 ```
 
 A GitHub Action will automatically run executing the following operations: 
