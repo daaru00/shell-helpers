@@ -4,10 +4,11 @@ This repository contains several bash scripts and release procedure to distribut
 
 ## Overview
 
-Script files are located in the folder `./package/usr/local/bin`.
-Debian package file descriptor is located in `./package/DEBIAN/control`.
-Debian package and tar archive creation are describe in `Makefile`.
-RPM package is converted from the debian one using [alien](https://wiki.debian.org/Alien).
+- Script files are located in the folder `./package/usr/local/bin`.
+- Debian package file descriptor is located in `./package/DEBIAN/control`.
+- Debian package and tar archive creation are describe in `Makefile`.
+- RPM package is converted from the debian one using [alien](https://wiki.debian.org/Alien).
+- A list of commands can be found herein the file [COMMANDS.md](./COMMANDS.md).
 
 ## Install
 
@@ -38,7 +39,7 @@ sudo tar -xvzf ./dist/shell-helpers.tar -C /usr/local/bin
 rm /tmp/shell-helpers.tgz
 ```
 
-## Usage
+## Development
 
 ### Build
 

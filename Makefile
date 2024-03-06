@@ -10,3 +10,9 @@ install:
 
 remove:
 	sudo dpkg -r -P ./dist/shell-helpers.deb
+
+doc:
+	echo "# Commands\n" > COMMANDS.md # init doc file
+	find package/usr/local/bin -type f -exec bash -c 'for script do echo "## $$(basename "$$script")"; echo "---"; "$$script" -h; echo "---"; done' bash {} + >> COMMANDS.md
+	sed -i 's/---/```/g' COMMANDS.md # format code
+	sed -i '/^$$/d' COMMANDS.md # remove empty rows
