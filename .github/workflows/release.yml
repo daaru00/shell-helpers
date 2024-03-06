@@ -19,7 +19,7 @@ jobs:
 
       - name: "Update control file with tag version"
         run: |
-          sed 's/Version.*/Version: ${{ env.tag }}/' package/DEBIAN/control
+          sed -i 's/Version.*/Version: ${{ env.tag }}/' package/DEBIAN/control
 
       - name: "Build packages"
         run: |
