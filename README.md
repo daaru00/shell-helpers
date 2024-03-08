@@ -41,13 +41,15 @@ rm /tmp/shell-helpers.tgz
 
 ## Development
 
+When creating or editing a script, take the [Command Line Interface Guidelines](https://clig.dev/) into consideration.
+
 ### Build
 
 Build debian package:
 ```bash
 make build
 ```
-Produce file `./dist/shell-helpers.deb`.
+Produce file `./dist/shell-helpers.deb`, `./dist/shell-helpers.rpm` and `./dist/shell-helpers.tgz`.
 
 ### Install
 
