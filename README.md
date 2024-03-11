@@ -8,7 +8,7 @@ This repository contains several bash scripts and release procedure to distribut
 - Debian package file descriptor is located in `./package/DEBIAN/control`.
 - Debian package and tar archive creation are describe in `Makefile`.
 - RPM package is converted from the debian one using [alien](https://wiki.debian.org/Alien).
-- A list of commands can be found herein the file [COMMANDS.md](./COMMANDS.md).
+- A list of commands can be found herein the file [COMMANDS.md](./doc/COMMANDS.md).
 
 ## Install
 
@@ -67,12 +67,12 @@ make remove
 
 ## Commands Documentation
 
-Execute the make command "doc":
+Execute the make command "commands":
 ```bash
-make doc
+make commands
 ```
 Will execute all commands inside `./package/usr/local/bin` with the argument '-h'. 
-The command's help output will be elaborated end saved into [COMMANDS.md](./COMMANDS.md).
+The command's help output will be elaborated end saved into [./doc/COMMANDS.md](./doc/COMMANDS.md).
 
 ## New Releases
 
