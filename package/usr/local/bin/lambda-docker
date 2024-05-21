@@ -10,6 +10,6 @@ exit 0
 fi
 
 RUNTIME=${1:-"nodejs"}
-VERSION=${2:-"18"}
+VERSION=${2:-"20"}
 
 docker run -it --rm -v "$(pwd):/app" -w "/app" -v ~/.aws/credentials:/root/.aws/credentials:ro --entrypoint "/bin/bash" "public.ecr.aws/lambda/${RUNTIME}:${VERSION}-x86_64"

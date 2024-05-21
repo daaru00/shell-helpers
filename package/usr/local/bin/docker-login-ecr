@@ -10,6 +10,8 @@ exit 0
 fi
 
 PROFILE=${1:-$AWS_DEFAULT_PROFILE}
+REGION=${2:-$AWS_REGION}
+REGION=${REGION:-'eu-west-1'}
 
 ACCOUNT_ID=$(aws --profile $PROFILE sts get-caller-identity --query Account --output text)
-aws --profile $PROFILE ecr get-login-password | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.eu-west-1.amazonaws.com
+aws --profile $PROFILE ecr get-login-password | docker login --username AWS --password-stdin "${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com"
