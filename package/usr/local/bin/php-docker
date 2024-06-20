@@ -11,4 +11,4 @@ fi
 
 VERSION=${1:-"latest"}
 
-docker run -it --rm -v "$(pwd):/app" -w "/app" --entrypoint "/bin/bash" "php:$VERSION"
+docker run -it --rm -p 3000:3000 -v "$(pwd):/app" -w "/app" --entrypoint "/bin/bash" "php:$VERSION"
